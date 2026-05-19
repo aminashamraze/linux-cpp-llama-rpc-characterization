@@ -21,4 +21,5 @@ Model used: Llama-3.2-3B-Instruct-Q4_K_M.gguf
 
 -m specifies the model being used, -p specifies the prompt, and -n specifies the number of tokens to be generated.
 
+Note: there are llama-cli/server builds that are different from llama-bench, llama-bench is mostly used for benchtop testing.
 
