@@ -1,4 +1,5 @@
-Think of LLama.cpp as the engine and .gguf as the brain/weights of the model. 
+Think of LLama.cpp as the engine and .gguf as the brain/weights of the model. In other words, Llama is the inference engine, written in cpp whereas 
+.gguf is the file that contains all the weights of the model.
 
 # 1. Install/build llama.cpp
 git clone https://github.com/ggerganov/llama.cpp
