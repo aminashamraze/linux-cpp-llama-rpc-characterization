@@ -1,1 +1,18 @@
 
+"RPC" stands for remote procedural call. In this experiment, it allows one linux machine to use another linux machine as compute participant. 
+It will help establish a baseline for future distributed compute experiments. It is commonly used as a tool for distributing inference.
+
+## Test Setup
+
+The RPC setup used two Linux machines connected over Ethernet.
+- Node count: 2 Linux machines
+- Connection: Ethernet
+- Framework: Llama.cpp with RPC support
+- Model: Llama 3B Q4_K_M
+- Benchmark tool: `llama-bench`
+
+For edge-AI systems, it may be useful to distribute inference workloads across multiple Linux-based nodes. However, distributed execution introduces overhead.
+
+
+This experiment was designed to observe whether RPC meaningfully changed inference throughput and real-time execution behavior.
+
