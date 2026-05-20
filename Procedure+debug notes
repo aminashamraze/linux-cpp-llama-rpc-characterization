@@ -1,1 +1,27 @@
+Before llama is installed,it is very important to check the RAM.
+In my case, I ran into an error which read something like below;
+
+"Loading model... /ggml_aligned_malloc: insufficient memory (attempted to allocate 14336.00 MB)
+ggml_backend_cpu_buffer_type_alloc_buffer: failed to allocate buffer of size 15032385536
+alloc_tensor_range: failed to allocate CPU buffer of size 15032385536
+llama_init_from_model: failed to initialize the context: failed to allocate buffer for kv cache
+common_init_result: failed to create context with model '/home/ashamraze/llama.cpp/models/llama-3.2-3b-instruct-q4_k_m.gguf'
+common_init_from_params: failed to create context with model '/home/ashamraze/llama.cpp/models/llama-3.2-3b-instruct-q4_k_m.gguf'
+Segmentation fault (core dumped)"
+
+So llama.cpp loaded the GGUF, then tried to allocate ~15 GB for context/KV cache and blew up. One possible explanation could be running with a large context (often the default in some configs/scripts), e.g. --ctx 8192 or higher. KV cache memory grows roughly with:
+
+context length (ctx), model size (3B), and/or data type for KV (f16 vs q8_0, etc.)
+
+I did not try to quantize the cache and therefore debug it since I was running out of time, however running it on a device which has available RAM allowed me to build it successfully.
+
+Second important step is to understand CPU cores usage during any task before running llama on top of it. This step is crucial because it gives you a baseline
+of what you are dealing with in terms of compute before running llama, and once you run llama you can compare cpu usage with that.
+
+For that, I ran 'lscpu' and checked the clock frequencies of cpu before running llama. Then, I ran llama in the background and used 'htop' or 'top' to 
+look at tall the cores that are busy during the llama run.
+I found that my linux machine was using all 8 cores. Note that this one did not have any classification of master/slave or big/small cores. 
+
+Another useful thing is to bind your tasks to the numbers of cores and observe how it affects performance. The metric of perfofrmance is tokens/second.
+ The goal here is to observe the 't/s' for both prompt processing and token generation. I specified that in command such as '-p 512' and '-n 128'.
 
