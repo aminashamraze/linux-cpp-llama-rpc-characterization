@@ -49,4 +49,10 @@ If you don't see anything that means you did not build with RPC, you can remove 
 >>cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DGGML_RPC=ON -DLLAMA_BUILD_TOOLS=ON
 >>cmake --build build -j
 ___________________________________________________________________________
-Once RPC is there, following way performance can be tested as shown in img1.PNG. 
+Once RPC is there, following way performance can be tested as shown in img1.PNG. That was done on the client side, on the server side, I had already
+enabled a port listening:
+>>cd ~/llama.cpp
+>>./build/bin/rpc-server -p 50052
+So when client side runs the RPC+llama-bench, like in img1 in images folder, the time will be printed out on the screen. You can compare the token generations, t/s and
+time taken in this setting with the one without RPC.
+___________________________________________________________________________
