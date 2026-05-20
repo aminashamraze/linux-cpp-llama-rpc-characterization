@@ -30,3 +30,23 @@ for t in 1 2 3 4 5 6 7 8; do
 done
 Following data was observed.
 
+Threads	Prefill pp128 t/s	Decode tg256 t/s
+1	11.91 ± 0.14	4.53 ± 0.02
+2	22.71 ± 0.41	7.25 ± 0.01
+3	29.80 ± 0.58	7.24 ± 0.00
+4	37.16 ± 0.67	7.42 ± 0.01
+5	34.00 ± 0.46	7.12 ± 0.02
+6	35.89 ± 0.82	7.34 ± 0.01
+7	33.45 ± 0.73	7.36 ± 0.01
+8	35.76 ± 0.79	7.04 ± 0.03
+ Notice how llama only needs around 2 cores to give the maximum efficiency. 
+___________________________________________________________________________
+To check if RPC is enabled properly,
+>>cd ~/llama.cpp
+>>./build/bin/llama-bench -h | grep rpc
+If you don't see anything that means you did not build with RPC, you can remove the existing build and rebuild with RPC.
+>>rm -rf build
+>>cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DGGML_RPC=ON -DLLAMA_BUILD_TOOLS=ON
+>>cmake --build build -j
+___________________________________________________________________________
+Once RPC is there, following way performance can be tested as shown in img1.PNG. 
