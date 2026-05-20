@@ -24,4 +24,9 @@ I found that my linux machine was using all 8 cores. Note that this one did not 
 
 Another useful thing is to bind your tasks to the numbers of cores and observe how it affects performance. The metric of perfofrmance is tokens/second.
  The goal here is to observe the 't/s' for both prompt processing and token generation. I specified that in command such as '-p 512' and '-n 128'.
+for t in 1 2 3 4 5 6 7 8; do
+    echo "=== t = $t ==="
+    ./llama-bench -m "$MODEL" -t $t -p 128 -n 256 -r 5
+done
+Following data was observed.
 
