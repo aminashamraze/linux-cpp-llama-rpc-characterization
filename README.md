@@ -1,5 +1,5 @@
 # linux-cpp-llama-rpc-characterization
-his project documents the setup, benchmarking, and performance characterization of Llama.cpp on a Linux-based platform, including local CPU thread-scaling experiments and RPC-enabled execution over Ethernet between two Linux nodes.
+This project documents the setup, benchmarking, and performance characterization of Llama.cpp on a Linux-based platform, including local CPU thread-scaling experiments and RPC-enabled execution over Ethernet between two Linux nodes.
 
 # Goal 
 The goal of this task is to build llama.cpp on linux, and characterize inference performance on linux with and without RPC. Two linux based computers were put in a direct ethernet network with each other, and RPC was enabled on the network. The inference performance of Llama was measured in presence of RPC and results were noted.
